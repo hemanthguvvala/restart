@@ -9,24 +9,21 @@ public class App {
     private static final List<UserModel> users = new ArrayList<>();
 
     public static void main(String[] args) {
-
-        onBoardingForm();
-        App app = new App();
-        app.usersInfo();
+       chooseMenu();
     }
 
     public static void chooseMenu() {
         System.out.println("Welcome to TestOrg, please choose Enter anyone of the Options \n " +
                 "1. Register a Member \n " +
                 "2. Get userInfo \n " +
-                "3. Exist");
+                "3. Exist \n");
         Scanner scan = new Scanner(System.in);
         int option = scan.nextInt();
         switch (option) {
             case 1 -> onBoardingForm();
             case 2 -> getUsersInfo();
             case 3 -> exitMessage();
-            default -> chooseMenu();
+
         }
     }
 
@@ -55,13 +52,27 @@ public class App {
             UserModel user = new UserModel(name, age);
             users.add(user);
         }
-        scan.close();
         welcomeOnBoardMessage(name, age);
+        System.out.println("Type 0 to return to main menu");
+        int option = scan.nextInt();
+        if(option == 0){
+            chooseMenu();
+        }
     }
 
     public static void getUsersInfo() {
+        Scanner scan = new Scanner(System.in);
+        if(users == null){
         for (UserModel user : users) {
             user.getUserInfo();
+        }}else{
+            System.out.println("There are no users, Do you want ot register?(Y/N)");
+            String option = scan.next();
+            if(option.equalsIgnoreCase("Y")){
+                onBoardingForm();
+            }else {
+                exitMessage();
+            }
         }
     }
 }
