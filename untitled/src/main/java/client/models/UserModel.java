@@ -12,7 +12,7 @@ public class UserModel {
     public UserModel(String userName, int age) {
         this.userName = userName;
         this.age = age;
-        this.userCount++;
+        userCount++;
     }
 
     public String getUserName() {
